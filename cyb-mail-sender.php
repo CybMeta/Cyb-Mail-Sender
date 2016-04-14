@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Cyb Mail Sender
 Plugin URI:   http://cybmeta.com
-Description:  Set mail "From" from site General Settings and set "Sender" to fix DKIM mail signature
+Description:  Set "Sender" header to wp_amail to work with SPF and DKIM signatures
 Version:      0.1
 Author:       Juan Padial (@CybMeta)
 Author URI:   http://cybmeta.com
