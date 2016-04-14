@@ -8,6 +8,15 @@ Author:       Juan Padial (@CybMeta)
 Author URI:   http://cybmeta.com
 */
 
+// WordPress needs to Set "Sender" or DKIM/DMARC will not work
+// See https://core.trac.wordpress.org/ticket/22837
+add_action( 'phpmailer_init', 'cyb_set_mail_sender' );
+function cyb_set_mail_sender( $phpmailer ) {
+   if ( empty( $phpmailer->Sender ) ) {
+        $phpmailer->Sender = $phpmailer->From;
+    }
+}
+
 // Exit if accessed directly
 if ( !defined( 'ABSPATH' ) ) exit;
 
@@ -21,13 +30,4 @@ function cyb_change_mail_from() {
 add_filter( 'wp_mail_from_name', 'cyb_change_mail_from_name');
 function cyb_change_mail_from_name() {
     return get_bloginfo( 'name' );
-}
-
-// WordPress needs to Set "Sender" or DKIM/DMARC will not work
-// See https://core.trac.wordpress.org/ticket/22837
-add_action( 'phpmailer_init', 'cyb_modify_mail_headers_for_dkim' );
-function cyb_modify_mail_headers_for_dkim( $phpmailer ) {
-   if ( empty( $phpmailer->Sender ) ) {
-        $phpmailer->Sender = $phpmailer->From;
-    }
 }
