@@ -8,6 +8,9 @@ Author:       Juan Padial (@CybMeta)
 Author URI:   http://cybmeta.com
 */
 
+// Exit if accessed directly
+if ( !defined( 'ABSPATH' ) ) exit;
+
 // WordPress needs to Set "Sender" or DKIM/DMARC will not work
 // See https://core.trac.wordpress.org/ticket/22837
 add_action( 'phpmailer_init', 'cyb_set_mail_sender' );
@@ -16,9 +19,6 @@ function cyb_set_mail_sender( $phpmailer ) {
         $phpmailer->Sender = $phpmailer->From;
     }
 }
-
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
 
 // Set mail From header to admin email
 add_filter( 'wp_mail_from', 'cyb_change_mail_from' );
