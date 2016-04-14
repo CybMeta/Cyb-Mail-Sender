@@ -17,7 +17,6 @@ add_action( 'phpmailer_init', 'cyb_set_mail_sender' );
 function cyb_set_mail_sender( $phpmailer ) {
    if ( empty( $phpmailer->Sender ) ) {
         $phpmailer->Sender = $phpmailer->From;
-        $phpmailer->AddReplyTo( $phpmailer->From );
     }
 }
 
